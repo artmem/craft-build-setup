@@ -34,6 +34,10 @@ Do not proceed past preflight without a project slug.
 - Semantic color tokens (OKLCH), WCAG 2.2 AA contrast
 - Lives under `~/dev/web/<slug>/` with directory-scoped CLAUDE.md
 
+Canonical conventions: @~/dotfiles/claude/references/craft.md. This section is a
+summary; that file is the source of truth — follow it for CSS architecture,
+content modeling, Twig, and a11y detail.
+
 ## Default plugin set
 
 Base set goes on every build. Client set adds on top when the project is a client
@@ -122,26 +126,31 @@ installed cleanly.
 
 ### 6. Front-end scaffold
 
-Read `references/stack-scaffold.md` and lay down:
+Read `references/stack-scaffold.md` for the scaffold mechanics and lay down:
 
 - `package.json` + Vite config wired to Craft's `vite` plugin or a `web/dist`
   manifest pattern
-- CSS architecture: `css/` with CUBE layers (composition / utility / block /
-  exception), Utopia fluid type+space custom properties, OKLCH semantic token
-  layer, a reset
-- Base Twig: `_layouts/`, Every Layout primitives as Twig includes/macros
-  (`stack`, `cluster`, `sidebar`, `switcher`, etc.), `_components/`
+- The CSS architecture and Twig structure per @~/dotfiles/claude/references/craft.md
+  and @~/dotfiles/claude/references/css-architecture.md — CUBE layers, Utopia
+  scale, OKLCH semantic tokens, Every Layout primitives. Don't restate them here;
+  follow those files.
 - Do **not** pull in Tailwind or any utility-class framework.
 
-Only read the reference file when you reach this step.
+Only read the reference files when you reach this step.
 
 ### 7. CLAUDE.md scoping
 
 Drop a project-level `CLAUDE.md` at `~/dev/web/<slug>/CLAUDE.md` that:
 
-- Inherits the global stack conventions (don't restate them — point to them)
+- Carries only repo-local references and project-specific notes. Do NOT import
+  `~/dotfiles` paths here — this file commits with a shared repo and those paths
+  won't resolve for teammates. If the team wants the conventions in-repo, copy
+  the relevant bits in; otherwise keep it thin.
 - Notes anything project-specific: plugin set, multi-site, content-model quirks
 - Records the DDEV project name and primary URL
+
+The personal layer (the dotfiles reference bundle) inherits from `~/dev/web/CLAUDE.md`
+above the repo — it reaches this project automatically and never commits.
 
 ### 8. Handoff
 
